@@ -44,15 +44,15 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 # create ROS packages
 USER agentic
 RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_python --dependencies rclpy std_msgs --license Apache-2.0 agent_ros_orchestrator
-RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_python --dependencies rclpy std_msgs --license Apache-2.0 agent_ros_collab
+#RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_python --dependencies rclpy std_msgs --license Apache-2.0 agent_ros_collab
 RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_cmake --license Apache-2.0 agentic_interfaces
 RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 RUN echo "source /home/agentic/ros2_ws/venv/bin/activate" >> ~/.bashrc
 RUN echo 'export LOGLEVEL="DEBUG"' >> ~/.bashrc
 
 ENV PYTHONPATH=""
-ENV PYTHONPATH="${PYTHONPATH}:/home/agentic/ros2_ws/venv/lib/python3.10/site-packages"
-ENV PYTHONPATH="${PYTHONPATH}:/home/agentic/ros2_ws/src/agent_ros_collab"
+ENV PYTHONPATH="${PYTHONPATH}:/home/agentic/ros2_ws/venv/lib/python3.12/site-packages"
+#ENV PYTHONPATH="${PYTHONPATH}:/home/agentic/ros2_ws/src/agent_ros_collab"
 ENV PYTHONPATH="${PYTHONPATH}:/home/agentic/ros2_ws/src/agent_ros_orchestrator"
 
 

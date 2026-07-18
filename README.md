@@ -5,22 +5,22 @@ Relant on ROS2
 ## Docker
 
 > build
-> `docker build . -t rel-ros:0.1.0`
+> `docker build . -t agentic-ros:0.1.0`
 
 > run
-> `docker run --rm --name rel-ros -it rel-ros:0.1.0 /bin/bash`
+> `docker run --rm --name agentic-ros -it agentic-ros:0.1.0 /bin/bash`
 
 > run with mounted volumes for all nodes
 
 ```bash
 cd ~/vs-workspace/rel_ros
 
-docker run --rm --name rel-ros -it \
+docker run --rm --name agentic-ros -it \
  -v $(pwd)/rel_ros_master_control:/home/relant/ros2_ws/src/rel_ros_master_control \
  -v $(pwd)/rel_ros_hmi:/home/relant/ros2_ws/src/rel_ros_hmi \
  -v $(pwd)/rel_interfaces:/home/relant/ros2_ws/src/rel_interfaces \
  -v $(pwd)/config:/home/relant/config \
- rel-ros:0.1.0 /bin/bash
+ agentic-ros:0.1.0 /bin/bash
 ```
 
 ## Environment Config
@@ -462,4 +462,4 @@ Available at `http://192.168.0.10:9080/docs`
 
 `sudo usermod -a -G dialout relant`
 
-mount the COM device when running the container, e.g `docker run --device=/dev/ttyUSB0:/dev/ttyUSB0 rel-ros:0.1.0`
+mount the COM device when running the container, e.g `docker run --device=/dev/ttyUSB0:/dev/ttyUSB0 agentic-ros:0.1.0`
