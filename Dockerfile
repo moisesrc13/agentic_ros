@@ -1,0 +1,62 @@
+FROM ros:humble
+
+ENV RELANT_PACKAGE=rel_ros_hmi
+ENV RELANT_NODE=rel_ros_hmi_node
+ENV CONFIG_PATH="/home/relant/config"
+
+USER root
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+# install ros package
+RUN apt-get update && apt-get install -y \
+  ros-humble-demo-nodes-cpp curl wget python3.11-dev \
+  swig gpiod libgpiod-dev \
+  virtualenv nano qt5-* \
+  ros-humble-demo-nodes-py && \
+  rm -rf /var/lib/apt/lists/*
+
+
+RUN useradd -m relant
+
+USER relant
+
+WORKDIR /home/relant
+COPY ./run.sh /home/relant/run.sh
+COPY ./prefill-test /home/relant/prefill-test
+
+# create ROS workspace and virutal env
+RUN mkdir -p /home/relant/ros2_ws/src
+COPY ./requirements.txt /home/relant/ros2_ws/requirements.txt
+COPY ./run-ros-*.sh /home/relant/ros2_ws/
+COPY ./config /home/relant/config
+RUN cd /home/relant/ros2_ws && virtualenv -p python3.10 ./venv && touch ./venv/COLCON_IGNORE
+
+
+# activate venv and install dependencies
+RUN source /opt/ros/humble/setup.bash && source /home/relant/ros2_ws/venv/bin/activate && pip install -r /home/relant/ros2_ws/requirements.txt
+
+
+USER root
+RUN chmod -R g+r /home/relant
+RUN chown -R relant:relant /home/relant
+# install VS Code (code-server)
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
+# create ROS packages
+USER relant
+RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_python --dependencies rclpy std_msgs --license Apache-2.0 rel_ros_master_control
+RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_python --dependencies rclpy std_msgs --license Apache-2.0 rel_ros_hmi
+RUN cd ~/ros2_ws/src && source /opt/ros/humble/setup.bash && ros2 pkg create --build-type ament_cmake --license Apache-2.0 rel_interfaces
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+RUN echo "source /home/relant/ros2_ws/venv/bin/activate" >> ~/.bashrc
+RUN echo 'export USE_TEST_MODBUS="true"' >> ~/.bashrc
+RUN echo 'export LOGLEVEL="DEBUG"' >> ~/.bashrc
+RUN echo 'export APP_MASTER_IOLINK_ID=0' >> ~/.bashrc
+
+ENV PYTHONPATH=""
+ENV PYTHONPATH="${PYTHONPATH}:/home/relant/ros2_ws/venv/lib/python3.10/site-packages"
+ENV PYTHONPATH="${PYTHONPATH}:/home/relant/ros2_ws/src/rel_ros_hmi"
+ENV PYTHONPATH="${PYTHONPATH}:/home/relant/ros2_ws/src/rel_ros_master_control"
+
+
+# launch ros package
+CMD ["/home/relant/run.sh"]
