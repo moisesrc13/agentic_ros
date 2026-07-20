@@ -5,9 +5,9 @@ import pymodbus.client as modbusClient
 from pymodbus.framer import FramerType
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from rel_ros_master_control.logger import new_logger
-from rel_ros_master_control.models.hmi_m import SlaveHMI
-from rel_ros_master_control.models.modbus_m import SlaveIOLink, SlaveTCP
+from agent_ros_orchestrator.logger import new_logger
+from agent_ros_orchestrator.models.hmi_m import SlaveHMI
+from agent_ros_orchestrator.models.modbus_m import SlaveIOLink, SlaveTCP
 
 logger = new_logger(__name__)
 

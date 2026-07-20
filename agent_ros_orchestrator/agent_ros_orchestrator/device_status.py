@@ -1,6 +1,6 @@
 from enum import Enum
 
-from rel_ros_master_control.util import is_bit_on
+from agent_ros_orchestrator.util import is_bit_on
 
 
 class StatusRegister(Enum):

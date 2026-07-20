@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from rel_ros_master_control.models.modbus_m import CRegister, HRegister, SlaveTCP
+from agent_ros_orchestrator.models.modbus_m import CRegister, HRegister, SlaveTCP
 
 
 class SlaveHMI(BaseModel):

@@ -7,8 +7,8 @@ import time
 
 import lgpio
 
-from rel_ros_master_control.logger import new_logger
-from rel_ros_master_control.models.pwm_m import PWMConfig
+from agent_ros_orchestrator.logger import new_logger
+from agent_ros_orchestrator.models.pwm_m import PWMConfig
 
 logger = new_logger(__name__)
 

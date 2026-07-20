@@ -1,10 +1,10 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 from pydantic import BaseModel
 
-from rel_ros_master_control.control import PWMOption, RegisterType, RelControl, SlaveType
-from rel_ros_master_control.logger import new_logger
-from rel_ros_master_control.services.pwm_start import do_start_pwm_process as run_pwm
-from rel_ros_master_control.services.pwm_stop import do_stop_pwm_process as stop_pwm
+from agent_ros_orchestrator.control import PWMOption, RegisterType, RelControl, SlaveType
+from agent_ros_orchestrator.logger import new_logger
+from agent_ros_orchestrator.services.pwm_start import do_start_pwm_process as run_pwm
+from agent_ros_orchestrator.services.pwm_stop import do_stop_pwm_process as stop_pwm
 
 logger = new_logger(__name__)
 

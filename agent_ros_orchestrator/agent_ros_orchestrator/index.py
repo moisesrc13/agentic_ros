@@ -7,10 +7,10 @@ import rclpy
 from rclpy.node import Node
 
 from rel_interfaces.msg import HMIUserTask
-from rel_ros_master_control.config import load_hmi_config, load_iolink_config
-from rel_ros_master_control.constants import Constants
-from rel_ros_master_control.control import run_masters_to_iolinks
-from rel_ros_master_control.flow_control import run_control
+from agent_ros_orchestrator.config import load_hmi_config, load_iolink_config
+from agent_ros_orchestrator.constants import Constants
+from agent_ros_orchestrator.control import run_masters_to_iolinks
+from agent_ros_orchestrator.flow_control import run_control
 
 
 class RelROSControlNode(Node):

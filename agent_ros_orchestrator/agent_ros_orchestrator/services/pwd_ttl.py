@@ -3,7 +3,7 @@ from enum import Enum
 import serial
 from pydantic import BaseModel
 
-from rel_ros_master_control.logger import new_logger
+from agent_ros_orchestrator.logger import new_logger
 
 logger = new_logger(__name__)
 

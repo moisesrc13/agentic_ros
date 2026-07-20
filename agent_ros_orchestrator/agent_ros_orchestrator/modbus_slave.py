@@ -11,9 +11,9 @@ from pymodbus.framer import FramerType
 from pymodbus.payload import BinaryPayloadBuilder
 from pymodbus.server import StartSerialServer, StartTcpServer
 
-from rel_ros_master_control.config import load_iolink_config
-from rel_ros_master_control.logger import new_logger
-from rel_ros_master_control.models.modbus_m import (
+from agent_ros_orchestrator.config import load_iolink_config
+from agent_ros_orchestrator.logger import new_logger
+from agent_ros_orchestrator.models.modbus_m import (
     HRegister,
     SlaveSerial,
     SlaveTCP,

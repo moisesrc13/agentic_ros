@@ -6,9 +6,9 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from rel_ros_master_control.config import load_hmi_config, load_iolink_config
-from rel_ros_master_control.control import RelControl
-from rel_ros_master_control.logger import new_logger
+from agent_ros_orchestrator.config import load_hmi_config, load_iolink_config
+from agent_ros_orchestrator.control import RelControl
+from agent_ros_orchestrator.logger import new_logger
 
 logger = new_logger(__name__)
 

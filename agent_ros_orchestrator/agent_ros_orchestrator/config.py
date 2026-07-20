@@ -3,10 +3,10 @@ from enum import Enum
 
 import yaml
 
-from rel_ros_master_control.logger import new_logger
-from rel_ros_master_control.models.hmi_m import ModbusHMIConfig
-from rel_ros_master_control.models.modbus_m import ModbusConfig
-from rel_ros_master_control.models.status_device_m import TowerStatus
+from agent_ros_orchestrator.logger import new_logger
+from agent_ros_orchestrator.models.hmi_m import ModbusHMIConfig
+from agent_ros_orchestrator.models.modbus_m import ModbusConfig
+from agent_ros_orchestrator.models.status_device_m import TowerStatus
 
 logger = new_logger(__name__)
 
